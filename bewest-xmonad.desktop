@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=custom xmonad
+Comment=Leightweight tiling window manager
+Exec=~/xmonad.start
+Icon=xmonad.png
+Type=XSession
+
+

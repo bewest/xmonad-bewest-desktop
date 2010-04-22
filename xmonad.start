@@ -1,0 +1,10 @@
+#!/bin/bash
+
+xrdb -merge .Xresources
+
+gnome-session &
+nm-applet &
+
+
+exec xmonad
+
