@@ -1,0 +1,14 @@
+
+syntax: glob
+
+
+*.hi
+*.o
+*.errors
+
+xmonad-*
+*swp
+
+
+#####
+# EOF

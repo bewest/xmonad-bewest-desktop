@@ -1,8 +1,9 @@
 [Desktop Entry]
+# 
 Encoding=UTF-8
-Name=custom xmonad
+Name=xmonad-bewest
 Comment=Leightweight tiling window manager
-Exec=~/xmonad.start
+Exec=/home/bewest/bin/xmonad.start
 Icon=xmonad.png
 Type=XSession
 

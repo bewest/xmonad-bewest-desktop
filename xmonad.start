@@ -2,8 +2,9 @@
 
 xrdb -merge .Xresources
 
+gnome-settings-daemon
 gnome-session &
-nm-applet &
+#nm-applet &
 
 
 exec xmonad
