@@ -14,7 +14,7 @@ enable:
 disable:
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
 
-install: $(XSESSION_DIR)/$(SESSION)  $(HOME)/.xmonad/xmonad.hs
+install: $(XSESSION_DIR)/$(SESSION)  $(HOME)/.xmonad/xmonad.hs enable
 	
 
 $(XSESSION_DIR)/$(SESSION): $(realpath $(SESSION))
