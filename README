@@ -1,0 +1,54 @@
+
+Author: Ben West
+Website: http://bitbucket.org/bewest/xmonad-bewest-config
+This repo will configure xmonad on ubuntu.
+
+QUICK GUIDE
+   $ make install
+   $ mkdir -p ~/bin ; cp xmonad.start ~/bin/xmonad.start
+   Log out, select the xmonad with your user name from GDM. DONE.
+
+I use it to sync xmonad configs on any ubuntu computer I'm using as a desktop.
+If you've got xmonad and ubuntu installed and up to date, this will get you up
+and running with xmonad in about five minutes.
+
+Ubuntu ships with a reasonable gnome setup.  This includes using Nautilus in a
+Windows/Mac style bid to control many facets of the UI.  Nautilus opens up a
+window that will hover over all other windows.  You can move it around by
+holding meta ( ALT ), holding mouse three and dragging the window.  The make
+file includes handy targets to control this feature of Nautilus.
+
+Ubuntu's startup is a complicated process.  The method we use is to install a
+desktop description file in the canonical location [ /usr/share/xsessions ].
+This makes it available to you as a selection when GDM asks you to log in.
+The desktop description tells GDM to use a script of our making.  It serves
+the same purpose as all those xsession / xinit and myriad variations.
+
+Configuring XMonad
+I use the defaults.
+Here is the entire file:
+-------------------------
+
+import XMonad
+
+main = xmonad defaultConfig
+     {
+       terminal = "xterm"
+     }
+
+------
+-- EOF
+
+Make targets:
+  show-nautilus-desktop
+    Issue a command that tells Nautilus to turn it's desktop feature back on.
+  hide-nautilus-desktop
+    Issue a command that tells Nautilus to turn it's desktop feature OFF.
+  install
+    Generate and Install our desktop file, disable the Nautilus desktop. 
+    Install our xmonad.hs in the right place.
+  desktop
+    Show the results of generating a desktop file.
+
+
+EOF

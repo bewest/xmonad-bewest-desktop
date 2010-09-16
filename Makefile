@@ -5,18 +5,26 @@
 #
 #
 
-
 XSESSION_DIR=/usr/share/xsessions
 SESSION=$(USER)-xmonad.desktop
+desktop=./xmonad-generate-desktop
 
-enable:
-	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true
-disable:
+hide-nautilus-desktop:
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
 
-install: $(XSESSION_DIR)/$(SESSION)  $(HOME)/.xmonad/xmonad.hs enable
-	
+show-nautilus-desktop:
+	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true
 
+install: $(XSESSION_DIR)/$(SESSION) \
+				 $(HOME)/.xmonad/xmonad.hs  \
+				 hide-nautilus-desktop
+	
+desktop: $(realpath $(SESSION))
+	$(desktop)
+
+$(realpath $(SESSION)):
+	$(desktop) > $@
+	
 $(XSESSION_DIR)/$(SESSION): $(realpath $(SESSION))
 	sudo ln -s $^ $@
 
