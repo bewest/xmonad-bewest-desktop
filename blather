@@ -1,0 +1,9 @@
+
+Recommendations
+TODO: Move this elsewhere.
+
+Using itsalltext with firefox makes for a great combiation.  I've got a script
+in http://bitbucket.org/bewest/homeware/src/tip/bin/texteditor and give it to
+itsalltext.  Any textarea in a window gets a button that opens vim in a window
+next to firefox, allowing me to edit my message in a proper editor while
+continuing to browse or look at the page in context.
