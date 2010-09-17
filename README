@@ -56,12 +56,12 @@ The run script here starts gnome-session and xmonad.  We've taken care of
 Nautilus because that window thingy is completely crippling.  But gnome does
 do a couple of other things you should know how to handle.
 
-When you first log in, you will be in window 1.  Window 1 will fill up with
+When you first log in, you will be in workspace 1.  Workspace 1 will fill up with
 all the desktop panels that gnome's window manager would ordinarily stick up
 near the edges of the screen.  Here's the method I use to correct the
 situation:
   1. Move the window using ALT-MOUSE3 and dragging the window.  This tells
-  xmonad that this is not a floating window, not a tiled window.
+  xmonad that this is a floating window, not a tiled window.
   2. Right click / MOUSE2 to open the Properties dialog from the context menu
   that flies out.
   3. Select Expand
@@ -80,7 +80,8 @@ applications.
 Workspace  
   * 1  : System Administrivia.  I usually keep an xterm scaled down to small or
     tiny tailing some logs, another xterm for launching stuff, and synaptic in
-    the main area.  I also browse the Ubuntu system menus from here.
+    the main area.  I also browse the Ubuntu system menus from here.  I rarely
+    spend time here.
 
   * 2  : System Control.  I run several instances of different firefox profiles
     concurrently so that I can manage the cookie jars very carefully.  I need
@@ -96,7 +97,7 @@ Workspace
     firefox.  I alt-space a few times to get full screen layout and then shift
     the rotation to get the one I want.
 
-  * 4  : Editing. 2 or 3 xterms
+  * 4  : Editing. 2 or 3 xterms.
   * 5-0: Overflow for editing or applications I just leave lying around.
     I don't keep track of what happens out here.
 
