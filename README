@@ -51,4 +51,53 @@ Make targets:
     Show the results of generating a desktop file.
 
 
+Things Worth Knowing
+The run script here starts gnome-session and xmonad.  We've taken care of
+Nautilus because that window thingy is completely crippling.  But gnome does
+do a couple of other things you should know how to handle.
+
+When you first log in, you will be in window 1.  Window 1 will fill up with
+all the desktop panels that gnome's window manager would ordinarily stick up
+near the edges of the screen.  Here's the method I use to correct the
+situation:
+  1. Move the window using ALT-MOUSE3 and dragging the window.  This tells
+  xmonad that this is not a floating window, not a tiled window.
+  2. Right click / MOUSE2 to open the Properties dialog from the context menu
+  that flies out.
+  3. Select Expand
+  4. Select Expand
+
+This procedure basically jostles the window out of xmonad's tiling scheme, and
+triggers a redrawing of those windows.  When the redrawing happens, they
+usually figure out where they belong.  Occasionally I need to drag it near the
+edge after they flatten out and trigger their redrawing again.
+
+I like having Ubuntu/Debian's system menus available.  xmonad will work with
+dmenu and dzen to give you a floating clock and autocompletion.  However, I
+typically find that I need a controlling terminal for many of my special
+applications.
+
+Workspace  
+  * 1  : System Administrivia.  I usually keep an xterm scaled down to small or
+    tiny tailing some logs, another xterm for launching stuff, and synaptic in
+    the main area.  I also browse the Ubuntu system menus from here.
+
+  * 2  : System Control.  I run several instances of different firefox profiles
+    concurrently so that I can manage the cookie jars very carefully.  I need
+    a controlling terminal to do that.  Other activities that need a window
+    for a short while, but not full screen ( some windows look better half
+    screen ) go here.  There's typically time to execute a command and then
+    switch to the workspace I want before the window pops up.  If not,
+    alt-shifting it over isn't hard.
+
+  * 3  : GMail and most browsing.  Here is usually where I use the layout
+    switching ( alt-space ).  I like to manage 2 firefox windows.  Sometimes
+    they go side by side ( default ), but other times, I want full screen
+    firefox.  I alt-space a few times to get full screen layout and then shift
+    the rotation to get the one I want.
+
+  * 4  : Editing. 2 or 3 xterms
+  * 5-0: Overflow for editing or applications I just leave lying around.
+    I don't keep track of what happens out here.
+
 EOF

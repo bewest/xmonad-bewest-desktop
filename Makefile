@@ -8,6 +8,7 @@
 XSESSION_DIR=/usr/share/xsessions
 SESSION=$(USER)-xmonad.desktop
 desktop=./xmonad-generate-desktop
+check=xmonad --recompile
 
 hide-nautilus-desktop:
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
@@ -17,10 +18,19 @@ show-nautilus-desktop:
 
 install: $(XSESSION_DIR)/$(SESSION) \
 				 $(HOME)/.xmonad/xmonad.hs  \
-				 hide-nautilus-desktop
-	
+				 hide-nautilus-desktop      \
+         check-xmonad
+	# If your xmonad.hs is ready, cp xmonad.start ~/bin/
+	# It should be available as $(SESSION) in the sessions list when you select
+	# your user name in GDM.
+
 desktop: $(realpath $(SESSION))
 	$(desktop)
+
+check-xmonad:
+	$(check)
+	# If $(check) printed nothing, your xmonad.hs is ready to be used.
+ 
 
 $(realpath $(SESSION)):
 	$(desktop) > $@
