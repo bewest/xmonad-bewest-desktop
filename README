@@ -1,12 +1,12 @@
 
 Author: Ben West
-Website: http://bitbucket.org/bewest/xmonad-bewest-config
+Website: http://github.com/bewest/xmonad-bewest-desktop
 This repo will configure xmonad on ubuntu.
 
 QUICK GUIDE
    $ make install
    $ mkdir -p ~/bin ; cp xmonad.start ~/bin/xmonad.start
-   Log out, select the xmonad with your user name from GDM. DONE.
+   Log out, select the xmonad session with your user name from GDM. DONE.
 
 I use it to sync xmonad configs on any ubuntu computer I'm using as a desktop.
 If you've got xmonad and ubuntu installed and up to date, this will get you up
@@ -70,7 +70,10 @@ situation:
 This procedure basically jostles the window out of xmonad's tiling scheme, and
 triggers a redrawing of those windows.  When the redrawing happens, they
 usually figure out where they belong.  Occasionally I need to drag it near the
-edge after they flatten out and trigger their redrawing again.
+edge after they flatten out and trigger their redrawing again.  This only
+happens the first time.  There's probably a nifty xmonad config somewhere that
+correctly deals with menus and gutters, but it's never bothered me enough to
+spend any time fixing it.
 
 I like having Ubuntu/Debian's system menus available.  xmonad will work with
 dmenu and dzen to give you a floating clock and autocompletion.  However, I
@@ -78,12 +81,12 @@ typically find that I need a controlling terminal for many of my special
 applications.
 
 Workspace  
-  * 1  : System Administrivia.  I usually keep an xterm scaled down to small or
-    tiny tailing some logs, another xterm for launching stuff, and synaptic in
-    the main area.  I also browse the Ubuntu system menus from here.  I rarely
-    spend time here.
+  1.  System Administrivia/Control.  I usually keep an xterm scaled down to
+    small or tiny tailing some logs, another xterm for launching stuff, and
+    synaptic in the main area.  I also browse the Ubuntu system menus from
+    here.  I rarely spend time here.
 
-  * 2  : System Control.  I run several instances of different firefox profiles
+  2.  System Control.  I run several instances of different firefox profiles
     concurrently so that I can manage the cookie jars very carefully.  I need
     a controlling terminal to do that.  Other activities that need a window
     for a short while, but not full screen ( some windows look better half
@@ -91,15 +94,25 @@ Workspace
     switch to the workspace I want before the window pops up.  If not,
     alt-shifting it over isn't hard.
 
-  * 3  : GMail and most browsing.  Here is usually where I use the layout
+  3.  GMail and most browsing.  Here is usually where I use the layout
     switching ( alt-space ).  I like to manage 2 firefox windows.  Sometimes
     they go side by side ( default ), but other times, I want full screen
     firefox.  I alt-space a few times to get full screen layout and then shift
     the rotation to get the one I want.
 
-  * 4  : Editing. 2 or 3 xterms.
-  * 5-0: Overflow for editing or applications I just leave lying around.
+  4.  Editing. 2 or 3 xterms OR debug firefox profile and 1 or 2 xterms.
+  5.  Overflow for editing.
+  6.  Overflow for editing.
+  7.  Pidgin.  For some reason, 7 is easy to find whenever I want to chat.
+  8.  Overflow for editing or...
+  9.  Applications I just leave lying around.
+    I don't keep track of what happens out here.
+  0.  Applications I just leave lying around.
     I don't keep track of what happens out here.
 
+Most of my time is spent in 3-5.  I no longer have to drag window titlebars or
+tiny corners in order to begin working.  I like to use the keybindings as my
+background image, because it reinforces the concept whenever there are no
+windows in the way.
 
 EOF
