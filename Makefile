@@ -11,9 +11,12 @@ desktop=./xmonad-generate-desktop
 check=xmonad --recompile
 
 hide-nautilus-desktop:
+	# In order to provide draggable and clickable icons, nautilus organizes all
+	# of them on an invisible window.  Get rid of it!
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
 
 show-nautilus-desktop:
+	# Restore it if you decide to go back to gnome.
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true
 
 install: $(XSESSION_DIR)/$(SESSION) \
@@ -26,24 +29,30 @@ install: $(XSESSION_DIR)/$(SESSION) \
 	# your user name in GDM.
 
 desktop: $(realpath $(SESSION))
+	# Preview what generating a desktop file for you will look like.
 	$(desktop)
 
 check-xmonad:
+	# Checking to see xmonad can read your config.
 	$(check)
 	# If $(check) printed nothing, your xmonad.hs is ready to be used.
  
 
 $(realpath $(SESSION)):
+	# Generate a desktop file for you.
 	$(desktop) > $@
 	
 $(XSESSION_DIR)/$(SESSION): $(realpath $(SESSION))
+	# Link your desktop file into the system's include area.
 	sudo ln -s $^ $@
 
 $(HOME)/bin/xmonad.start: xmonad.start
+	# Give yourself a start script.  Used by the desktop file.
 	mkdir -p $(@D)
 	cp -v $^ $@
 
 $(HOME)/.xmonad/xmonad.hs: xmonad.hs
+	# Default, stock, xmonad config.
 	mkdir -p $(@D)
 	cp -v $^ $@
 
