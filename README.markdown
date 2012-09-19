@@ -116,7 +116,7 @@ meaningless UI choices.
 * http://askubuntu.com/questions/67653/tiling-window-management-with-unity
 * https://github.com/hamaxx/unity-2d-for-xmonad
 * https://gist.github.com/1300108
-* 
+
 ## Workspace  
 
 How I use xmonad.
