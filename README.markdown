@@ -125,7 +125,8 @@ How I use xmonad.
   1. System Administrivia/Control.  I usually keep an xterm scaled
      down to small or tiny tailing some logs, another xterm for launching
      stuff, and synaptic in the main area.  I also browse the Ubuntu
-     system menus from here.  I rarely spend time here.
+     system menus from here.  I rarely spend time here.  The menus are
+     here when I need them and useful for admin stuff.
 
   2. Browsers.  I use either work or personal profiles here.  xterms
      come and go.
