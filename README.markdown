@@ -117,6 +117,7 @@ meaningless UI choices.
 * https://github.com/hamaxx/unity-2d-for-xmonad
 * https://gist.github.com/1300108
 * http://www.kmels.net/posts/how-to/install-xmonad-ubuntu-12.04.html
+* http://joedicastro.com/productividad-en-el-escritorio-linux-xmonad.html
 
 ## Workspace  
 
