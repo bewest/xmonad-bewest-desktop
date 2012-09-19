@@ -1,9 +1,9 @@
 [GNOME Session]
-Name=Xmonad/GNOME
+Name=Ubuntu 2D
 RequiredComponents=gnome-settings-daemon;
-# RequiredProviders=windowmanager;
 RequiredProviders=windowmanager;panel;shell;
-DefaultProvider-windowmanager=xmonad-starter
+DefaultProvider-windowmanager=metacity
 DefaultProvider-panel=unity-2d-panel
 DefaultProvider-shell=unity-2d-shell
-DesktopName=xmonad + gnome panels
+
+DesktopName=Unity

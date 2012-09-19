@@ -1,0 +1,9 @@
+[GNOME Session]
+Name=Ubuntu
+RequiredComponents=gnome-settings-daemon;
+RequiredProviders=windowmanager;panel;
+DefaultProvider-windowmanager=compiz
+DefaultProvider-panel=compiz
+IsRunnableHelper=/usr/lib/nux/unity_support_test
+FallbackSession=ubuntu-2d
+DesktopName=Unity
