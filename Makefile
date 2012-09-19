@@ -14,10 +14,12 @@ hide-nautilus-desktop:
 	# In order to provide draggable and clickable icons, nautilus organizes all
 	# of them on an invisible window.  Get rid of it!
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
+	gsettings set org.gnome.desktop.background show-desktop-icons false
 
 show-nautilus-desktop:
 	# Restore it if you decide to go back to gnome.
 	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true
+	gsettings set org.gnome.desktop.background show-desktop-icons true
 
 install: $(XSESSION_DIR)/$(SESSION) \
          $(HOME)/.xmonad/xmonad.hs  \

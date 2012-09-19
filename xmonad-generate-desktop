@@ -3,7 +3,7 @@ echo [Desktop Entry]
 echo # 
 echo Encoding=UTF-8
 echo Name=xmonad-$USER
-echo Comment=Leightweight tiling window manager
+echo Comment=Lightweight tiling window manager
 echo Exec=$HOME/bin/xmonad.start
 echo Icon=xmonad.png
 echo Type=XSession

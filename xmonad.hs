@@ -1,8 +1,9 @@
 -------------------------
 
 import XMonad
+import XMonad.Config.Desktop
 
-main = xmonad defaultConfig
+main = xmonad desktopConfig
      {
        terminal = "xterm"
      }
