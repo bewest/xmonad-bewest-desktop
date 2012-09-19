@@ -116,39 +116,37 @@ meaningless UI choices.
 * http://askubuntu.com/questions/67653/tiling-window-management-with-unity
 * https://github.com/hamaxx/unity-2d-for-xmonad
 * https://gist.github.com/1300108
+* http://www.kmels.net/posts/how-to/install-xmonad-ubuntu-12.04.html
 
 ## Workspace  
 
 How I use xmonad.
 
-  1.  System Administrivia/Control.  I usually keep an xterm scaled down to
-    small or tiny tailing some logs, another xterm for launching stuff, and
-    synaptic in the main area.  I also browse the Ubuntu system menus from
-    here.  I rarely spend time here.
+  1. System Administrivia/Control.  I usually keep an xterm scaled
+     down to small or tiny tailing some logs, another xterm for launching
+     stuff, and synaptic in the main area.  I also browse the Ubuntu
+     system menus from here.  I rarely spend time here.
 
-  2.  System Control.  I run several instances of different firefox profiles
-    concurrently so that I can manage the cookie jars very carefully.  I need
-    a controlling terminal to do that.  Other activities that need a window
-    for a short while, but not full screen ( some windows look better half
-    screen ) go here.  There's typically time to execute a command and then
-    switch to the workspace I want before the window pops up.  If not,
-    alt-shifting it over isn't hard.
+  2. Browsers.  I use either work or personal profiles here.  xterms
+     come and go.
 
-  3.  GMail and most browsing.  Here is usually where I use the layout
-    switching ( alt-space ).  I like to manage 2 firefox windows.  Sometimes
-    they go side by side ( default ), but other times, I want full screen
-    firefox.  I alt-space a few times to get full screen layout and then shift
-    the rotation to get the one I want.
+  3. Hacking: browsers and xterms.  Here is usually where I use the
+     layout switching ( alt-space ).  I like to manage 2 firefox windows.
+     Sometimes they go side by side ( default ), but other times, I want
+     full screen firefox.  I alt-space a few times to get full screen
+     layout and then shift the rotation to get the one I want.
+     Here I use development profiles.
 
-  4.  Editing. 2 or 3 xterms OR debug firefox profile and 1 or 2 xterms.
-  5.  Overflow for editing.
-  6.  Overflow for editing.
-  7.  Pidgin.  For some reason, 7 is easy to find whenever I want to chat.
-  8.  Overflow for editing or...
-  9.  Applications I just leave lying around.
-    I don't keep track of what happens out here.
-  0.  Applications I just leave lying around.
-    I don't keep track of what happens out here.
+  4. Editing. 2 or 3 xterms OR debug firefox profile and 1 or 2 xterms.
+  5. Overflow for editing.
+  6. Overflow for editing.
+  7. Pidgin.  For some reason, 7 is easy to find whenever I want to chat.
+  8. Overflow for editing or... I run the daemon for emacs_xterm in a
+     terminal here.
+  9. Sometimes an alternate browser profile goes here.
+     don't keep track of what happens out here.
+  0. Applications I just leave lying around.
+     don't keep track of what happens out here.
 
 Most of my time is spent in 3-5.  I no longer have to drag window titlebars or
 tiny corners in order to begin working.  I like to use the keybindings as my
