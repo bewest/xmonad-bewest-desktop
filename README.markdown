@@ -190,6 +190,12 @@ meaningless UI choices.
 * https://gist.github.com/1300108
 * http://www.kmels.net/posts/how-to/install-xmonad-ubuntu-12.04.html
 * http://joedicastro.com/productividad-en-el-escritorio-linux-xmonad.html
+* https://gist.github.com/2551959
+* http://askubuntu.com/questions/137685/how-can-i-get-xmonad-to-work-with-gnome-3
+* http://andredieb.com/posts/14766080456/
+* http://www.vicfryzel.com/2011/12/26/true-fullscreen-xmonad
+* https://github.com/robertmassaioli/config-files/tree/master/xmonad
+* http://www.subsymbol.org/2012/09/xmonad-on-unity-1204.html
 
 ### Specs
 
