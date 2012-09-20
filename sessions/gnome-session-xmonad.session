@@ -3,8 +3,8 @@ Name=Xmonad/GNOME
 RequiredComponents=gnome-settings-daemon;
 # RequiredProviders=windowmanager;
 RequiredProviders=windowmanager;panel;shell;
-DefaultProvider-windowmanager=xmonad
+DefaultProvider-windowmanager=gnome-session-xmonad
 DefaultProvider-panel=unity-2d-panel
 DefaultProvider-shell=unity-2d-shell
 
-DesktopName=xmonad
+DesktopName=gnome-session-xmonad

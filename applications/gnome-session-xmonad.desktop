@@ -1,8 +1,9 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=Xmonad
-Exec=/home/bewest/bin/xmonad.start
+Name=Xmonad via xmonad.start
+#Exec=xmonad.start
+Exec=xmonad
 NoDisplay=true
 X-GNOME-WMName=Xmonad
 X-GNOME-Autostart-Phase=WindowManager

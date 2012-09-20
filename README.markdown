@@ -7,9 +7,80 @@ This repo will configure xmonad on ubuntu.
 ## Status
 
 Circa `Tue Sep 18 19:36:31 PDT 2012`, I'm updating to Ubuntu Precise
-12, which includes numerous UI updates.
+12, which includes numerous UI updates, forcing me to again revisit
+how this stuff works.
 
-Reading through the resources to figure out the best thing to do.
+I can't figure out how to get the session stuff working so Firefox menus match the system.
+The easiest way to getting everything to work right seems to be
+placing a call to gnome-session and any panels before dbus-launch in
+your `xmonad.start` script, and to specify using it in your xsession.
+This also reduces the number of configs needed down to one.
+
+## Theory of operation
+
+This is a brief snynopsis of how systems like Ubuntu get gnome,
+sessions, window managers, and other expected comforts up and running.
+Use this description at your own risk.
+
+Xorg starts up and through xsessions has some support for xsessions.
+Ubuntu replaces the default xdm greeter with gdm, which reads
+available xsessions from `/usr/share/xsessions/` which are stored as
+`.desktop` files.  The exec name is used to stat a dbus sessions
+coordinated with gnome.  All future "session-ish" names must match
+this name in order for all of gnome's features to work.  Without this
+matching things will mostly work, but Firefox menus will be ugly, for example.
+
+The common case is to execute gnome-session, which loads sessions
+described in `/usr/share/gnome-sessions/sessions/*.session`.
+These files describe a chain of dependencies, which are resolved by
+looking up definitions in `/usr/share/applications/*.desktop`.
+However, some "components" aren't defined here?
+
+Here's an example:
+My xsession specified Exec=gnome-session --session xmonad.start
+This produces:
+
+* `dbus-launch --exit-with-session gnome-session --sesssion xmonad.start`
+* gnome-session --session xmonad.start
+
+    bewest@paragon:~$ ps aux | grep session
+    [...]
+    bewest    7453  0.1  0.3 390600  9864 ?        Ssl  20:43   0:00 gnome-session --session xmonad.start
+    bewest    7555  0.0  0.0  26548   796 ?        S    20:43   0:00 /usr/bin/dbus-launch --exit-with-session gnome-session --session xmonad.start
+
+So in order for everything to work correctly, the Exec line of the
+xsession definition must match the --session argument crafted for gnome-session.
+
+The whole process of dependency finding can be short-circuited by
+specifying your custom `xmonad.start` as an xsession definition,
+starting gnome-session and launching dbus-launch yourself.  This at
+least fixes things like Firefox menus, and probably lots of other
+stuff.  You will also need to start panels and whatnot in your script.
+
+The more complicated version goes like this (untested):
+xsession uses a custom wrapper, called `gnome-session-xmonad` which
+gets --exit-with-session gnome-session-xmonad because of
+`Eval=gnome-session-xmonad`.  This needs to create a gnome-session
+called gnome-session-xmonad which can be looked up in
+`/usr/share/gnome-session/sessions/gnome-session-xmonad.session.`
+From here it's probably safe to start xmonad through the provided
+`/usr/share/applications/xmonad.desktop` however, clever use of
+`TryExec` here can allow us to execute xmonad.start, and then try
+xmonad if it fails.
+
+Complicated version doesn't seem to work:
+
+    bewest@paragon:~$ ps aux | grep xmonad| grep -v vim
+    bewest    7579  0.0  0.0  12328   708 ?        S    05:51   0:00 /bin/bash /home/bewest/bin/xmonad.start
+    bewest    9166  0.0  0.3 390600  9828 ?        Ssl  10:14   0:00 gnome-session --session gnome-session-xmonad
+    bewest    9268  0.0  0.0  26548   796 ?        S    10:14   0:00 /usr/bin/dbus-launch --exit-with-session gnome-session-xmonad
+    bewest    9283  0.0  0.0  12312  1428 ?        S    10:14   0:00 /bin/bash /home/bewest/bin/xmonad.start
+    bewest    9291  0.0  0.0  12312   592 ?        S    10:14   0:00 /bin/bash /home/bewest/bin/xmonad.start
+    bewest    9293  0.5  0.1  45048  4328 ?        S    10:14   0:00 /home/bewest/.xmonad/xmonad-x86_64-linux
+    bewest    9683  0.0  0.0   9396   924 pts/8    S+   10:16   0:00 grep xmonad
+    bewest@paragon:~$ 
+This is the expected output, but Firefox menus are still busted.
+I can't figure out how to get the session stuff working so Firefox menus match the system.
 
 ## QUICK GUIDE
 
@@ -34,8 +105,8 @@ This makes it available to you as a selection when GDM asks you to log in.
 The desktop description tells GDM to use a script of our making.  It serves
 the same purpose as all those xsession / xinit and myriad variations.
 
-Configuring XMonad
-I use the defaults.
+## Configuring XMonad
+I try to use the defaults.
 See my [bewest/homeware] repo for xterm-blue, and xterm-light, and
 some other utilities to bind xterm to different solarized
 colorschemes.
@@ -112,12 +183,33 @@ meaningless UI choices.
 ## Resources
 * http://markhansen.co.nz/xmonad-ubuntu-oneiric/
 * http://www.haskell.org/haskellwiki/Xmonad/Using_xmonad_in_Unity_2D
+* http://www.haskell.org/haskellwiki/Xmonad/Using_xmonad_in_Gnome
 * http://www.elonflegenheimer.com/2012/06/22/xmonad-in-ubuntu-12.04-with-unity-2d.html
 * http://askubuntu.com/questions/67653/tiling-window-management-with-unity
 * https://github.com/hamaxx/unity-2d-for-xmonad
 * https://gist.github.com/1300108
 * http://www.kmels.net/posts/how-to/install-xmonad-ubuntu-12.04.html
 * http://joedicastro.com/productividad-en-el-escritorio-linux-xmonad.html
+
+### Specs
+
+There are specs for these things:
+* http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+* https://live.gnome.org/SessionManagement/GnomeSession
+* http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html
+* http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+* http://www.freedesktop.org/wiki/Specifications/startup-notification-spec?action=show&redirect=Standards%2Fstartup-notification-spec
+* http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#extra-actions
+* 
+
+### Xmonad docs
+* http://xmonad.org/xmonad-docs/xmonad/XMonad-ManageHook.html
+* http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-ManageDocks.html
+* http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Actions-CopyWindow.html
+
+### Misc
+* https://github.com/sabetts/stumpwm/wiki/Ubuntu-12.04-and-Gnome-and-StumpWM
+* 
 
 ## Workspace  
 

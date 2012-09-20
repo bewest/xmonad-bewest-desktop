@@ -1,10 +1,13 @@
 [Desktop Entry]
 # 
 Encoding=UTF-8
-Name=xmonad-bewest
-Comment=Leightweight tiling window manager
-Exec=/home/bewest/bin/xmonad.start
+Name=xmonad.start as xsession - bewest
+#Name=GNOME with Xmonad
+Comment=Use your xmonad.start to start xmonad as the window manager.
+#Exec=gnome-session-xmonad
+#Exec=/home/bewest/bin/xmonad.start
+Exec=xmonad.start
+TryExec=gnome-session
 Icon=xmonad.png
-Type=XSession
-
+Type=Application
 

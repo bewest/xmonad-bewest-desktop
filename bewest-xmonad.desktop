@@ -1,12 +1,12 @@
 [Desktop Entry]
 # 
 Encoding=UTF-8
-Name=xmonad-bewest
+Name=xmonad.start as xsession - bewest
 #Name=GNOME with Xmonad
-Comment=A GNOME fallback mode session using xmonad as the window manager.
+Comment=Use your xmonad.start to start xmonad as the window manager.
 #Exec=gnome-session-xmonad
 #Exec=/home/bewest/bin/xmonad.start
-Exec=gnome-session --session xmonad.start
+Exec=xmonad.start
 TryExec=gnome-session
 Icon=xmonad.png
 Type=Application
