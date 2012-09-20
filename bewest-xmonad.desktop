@@ -2,9 +2,12 @@
 # 
 Encoding=UTF-8
 Name=xmonad-bewest
-Comment=Leightweight tiling window manager
-Exec=/home/bewest/bin/xmonad.start
+#Name=GNOME with Xmonad
+Comment=A GNOME fallback mode session using xmonad as the window manager.
+#Exec=gnome-session-xmonad
+#Exec=/home/bewest/bin/xmonad.start
+Exec=gnome-session --session xmonad.start
+TryExec=gnome-session
 Icon=xmonad.png
-Type=XSession
-
+Type=Application
 
