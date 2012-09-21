@@ -112,7 +112,7 @@ starting gnome-session and launching dbus-launch yourself.  This at
 least fixes things like Firefox menus, and probably lots of other
 stuff.  You will also need to start panels and whatnot in your script.
 
-The more complicated version goes like this (untested):
+The more complicated version goes like this:
 xsession uses a custom wrapper, called `gnome-session-xmonad` which
 gets --exit-with-session gnome-session-xmonad because of
 `Eval=gnome-session-xmonad`.  This needs to create a gnome-session
