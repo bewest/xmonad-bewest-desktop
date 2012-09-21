@@ -2,11 +2,12 @@
 echo [Desktop Entry]
 echo # 
 echo Encoding=UTF-8
-echo Name=xmonad-$USER
-echo Comment=Lightweight tiling window manager
+echo Name=$USER/bin/xmonad.start as xsession w/gnome fallback
+echo Comment=use your xmonad.start as an xsession, fallback to gnome-session
 echo Exec=$HOME/bin/xmonad.start
+echo TryExec=gnome-session
 echo Icon=xmonad.png
-echo Type=XSession
+echo Type=Application
 
 #####
 # EOF

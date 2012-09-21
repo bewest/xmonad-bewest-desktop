@@ -1,20 +1,75 @@
 
 This repo will configure xmonad on ubuntu.
 
+I use it to sync xmonad configs on any ubuntu computer I'm using as a desktop.
+If you've got xmonad and ubuntu installed and up to date, this will get you up
+and running with xmonad in about five minutes.
+
   * Author: Ben West
   * Website: http://github.com/bewest/xmonad-bewest-desktop
 
-## Status
+## QUICK GUIDE
 
-Circa `Tue Sep 18 19:36:31 PDT 2012`, I'm updating to Ubuntu Precise
-12, which includes numerous UI updates, forcing me to again revisit
-how this stuff works.
+```bash
+    $ make install
+    # Log out, select the xmonad session with your user name from GDM. DONE.
+```
 
-I can't figure out how to get the session stuff working so Firefox menus match the system.
-The easiest way to getting everything to work right seems to be
-placing a call to gnome-session and any panels before dbus-launch in
-your `xmonad.start` script, and to specify using it in your xsession.
-This also reduces the number of configs needed down to one.
+This has no impact on your system or your ability to upgrade packages.
+We installed a new xsession pointed at your stuff, symlinked into your
+home directory.  `alt-b` was added to toggle the panel at the top.
+Logging in should produce a nice ready-to-use xmonad session for you.
+
+If something goes horribly wrong and fails (it wont'), you can log out
+using alt-Q, or at worst killall xmonad.start, and your old sessions
+are ready to go.  Your old gnome-session is specified as the fallback
+behavior in case your xmonad.start goes horribly awry.  If you find
+yourself inf stock gnome, check `~/.xesssion-errors`.
+
+Doing:
+```bash
+git clone git://github.com/bewest/xmonad-bewest-desktop.git
+cd xmonad-bewest-desktop
+make install
+```
+Should inform of how it installs a custom xsession pointed at your
+~/bin/xmonad.start which is used to start X.  You can now log out, and
+select the xmonad session pointing at your xmonad.start.  I've
+provided a simple one that starts gnome-session and dbus so that eg
+Firefox menus look correct, and docks work correctly.
+
+I also copy a basic xmonad config that tries not to do anything fancy.
+I used to use the default xmonad config.  The config that is in place
+is to restore default xmonad configurations from broken 3rd party
+overrides.
+
+
+### Make targets:
+
+    show-nautilus-desktop
+      Issue a command that tells Nautilus to turn it's desktop feature back on.
+    hide-nautilus-desktop
+      Issue a command that tells Nautilus to turn it's desktop feature OFF.
+    install
+      Generate and Install our desktop file, disable the Nautilus desktop.
+      Install our xmonad.hs in the right place.
+    desktop
+      Show the results of generating a desktop file.
+
+
+Ubuntu ships with a reasonable gnome setup.  This includes using Nautilus in a
+Windows/Mac style bid to control many facets of the UI.  Nautilus opens up a
+window that will hover over all other windows.  You can move it around by
+holding meta ( ALT ), holding mouse three and dragging the window.  The make
+file includes handy targets to control this feature of Nautilus.
+
+Ubuntu's startup is a complicated process.  The method we use is to install a
+desktop description file describing an xsession in the canonical
+location [ /usr/share/xsessions ].  This makes it available to you as
+a selection when GDM asks you to log in.  The desktop description
+tells GDM to use a script of our making.  It serves the same purpose
+as all those xsession / xinit and myriad variations.
+
 
 ## Theory of operation
 
@@ -81,60 +136,10 @@ Complicated version doesn't seem to work:
     bewest@paragon:~$ 
 This is the expected output, but Firefox menus are still busted.
 I can't figure out how to get the session stuff working so Firefox menus match the system.
-
-## QUICK GUIDE
-
-
-    $ make install
-    $ mkdir -p ~/bin ; cp xmonad.start ~/bin/xmonad.start
-    Log out, select the xmonad session with your user name from GDM. DONE.
-
-I use it to sync xmonad configs on any ubuntu computer I'm using as a desktop.
-If you've got xmonad and ubuntu installed and up to date, this will get you up
-and running with xmonad in about five minutes.
-
-Ubuntu ships with a reasonable gnome setup.  This includes using Nautilus in a
-Windows/Mac style bid to control many facets of the UI.  Nautilus opens up a
-window that will hover over all other windows.  You can move it around by
-holding meta ( ALT ), holding mouse three and dragging the window.  The make
-file includes handy targets to control this feature of Nautilus.
-
-Ubuntu's startup is a complicated process.  The method we use is to install a
-desktop description file in the canonical location [ /usr/share/xsessions ].
-This makes it available to you as a selection when GDM asks you to log in.
-The desktop description tells GDM to use a script of our making.  It serves
-the same purpose as all those xsession / xinit and myriad variations.
-
-## Configuring XMonad
-I try to use the defaults.
-See my [bewest/homeware] repo for xterm-blue, and xterm-light, and
-some other utilities to bind xterm to different solarized
-colorschemes.
-Here is the entire file:
--------------------------
-
-```haskell
-import XMonad
-
-main = xmonad defaultConfig
-     {
-       terminal = "xterm"
-     }
-
-------
--- EOF
-```
-
-Make targets:
-  show-nautilus-desktop
-    Issue a command that tells Nautilus to turn it's desktop feature back on.
-  hide-nautilus-desktop
-    Issue a command that tells Nautilus to turn it's desktop feature OFF.
-  install
-    Generate and Install our desktop file, disable the Nautilus desktop. 
-    Install our xmonad.hs in the right place.
-  desktop
-    Show the results of generating a desktop file.
+The easiest way to getting everything to work right seems to be
+placing a call to gnome-session and any panels before dbus-launch in
+your `xmonad.start` script, and to specify using it in your xsession.
+This also reduces the number of configs needed down to one.
 
 
 ## Things Worth Knowing
@@ -164,6 +169,10 @@ myKeys = [
   , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 ]
 ```
+
+My xmonad.hs fixes these issues, and successfully floats a mac-like
+command bar through every workspace correctly.  A new key, `alt-b`
+toggles the gap produces.  Very very nice.
 
 ### Inacurate/lies
 The run script here starts gnome-session and xmonad.  We've taken care of
@@ -207,6 +216,27 @@ helps me focus on the task at hand.  I've used xmonad since at least
 xterm).  xmonad wears very well, and is kind of addictive.  Now, when
 I approach other computers I find myself confounded by the array of
 meaningless UI choices.
+
+#### Configuring XMonad
+I try to use the defaults.
+See my [bewest/homeware] repo for xterm-blue, and xterm-light, and
+some other utilities to bind xterm to different solarized
+colorschemes.
+Here is the entire file:
+-------------------------
+
+```haskell
+import XMonad
+
+main = xmonad defaultConfig
+     {
+       terminal = "xterm"
+     }
+
+------
+-- EOF
+```
+
 
 ## Resources
 * http://markhansen.co.nz/xmonad-ubuntu-oneiric/

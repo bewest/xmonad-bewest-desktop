@@ -13,19 +13,18 @@ check=xmonad --recompile
 hide-nautilus-desktop:
 	# In order to provide draggable and clickable icons, nautilus organizes all
 	# of them on an invisible window.  Get rid of it!
-	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false
-	gsettings set org.gnome.desktop.background show-desktop-icons false
+	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop false || echo ''
+	gsettings set org.gnome.desktop.background show-desktop-icons false || echo ''
 
 show-nautilus-desktop:
 	# Restore it if you decide to go back to gnome.
-	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true
-	gsettings set org.gnome.desktop.background show-desktop-icons true
+	gconftool --type boolean --set /apps/nautilus/preferences/show_desktop true || echo ''
+	gsettings set org.gnome.desktop.background show-desktop-icons true || echo ''
 
 install: $(XSESSION_DIR)/$(SESSION) \
          $(HOME)/.xmonad/xmonad.hs  \
          check-xmonad               \
-         $(HOME)/bin/xmonad.start   \
-         hide-nautilus-desktop
+         $(HOME)/bin/xmonad.start # \ #hide-nautilus-desktop
 	# If your xmonad.hs is ready, cp xmonad.start ~/bin/
 	# It should be available as $(SESSION) in the sessions list when you select
 	# your user name in GDM.
@@ -48,7 +47,7 @@ $(XSESSION_DIR)/$(SESSION): $(realpath $(SESSION))
 	# Link your desktop file into the system's include area.
 	sudo ln -s $^ $@
 
-$(HOME)/bin/xmonad.start: xmonad.start
+$(HOME)/bin/xmonad.start: startups/xmonad.start
 	# Give yourself a start script.  Used by the desktop file.
 	mkdir -p $(@D)
 	cp -v $^ $@
