@@ -138,6 +138,34 @@ Make targets:
 
 
 ## Things Worth Knowing
+
+### Keys
+
+XMonad.Config.Gnome keys are broken on Ubuntu 12.04.
+
+* gnome-session-save is replaced by gnome-session-quit
+* alt-p does nothing
+* gmrun doesn't exist.
+
+Default bindings:
+http://xmonad.org/xmonad-docs/xmonad/src/XMonad-Config.html
+
+```haskell
+import System.Exit
+myKeys = [
+
+  -- launching and killing programs
+  , ((modMask,               xK_p     ), spawn "dmenu_run") -- %! Launch dmenu
+  , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun") -- %! Launch gmrun
+
+  -- [...]
+  -- quit, or restart
+  -- %! Quit xmonad
+  , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+]
+```
+
+### Inacurate/lies
 The run script here starts gnome-session and xmonad.  We've taken care of
 Nautilus because that window thingy is completely crippling.  But gnome does
 do a couple of other things you should know how to handle.
@@ -196,6 +224,7 @@ meaningless UI choices.
 * http://www.vicfryzel.com/2011/12/26/true-fullscreen-xmonad
 * https://github.com/robertmassaioli/config-files/tree/master/xmonad
 * http://www.subsymbol.org/2012/09/xmonad-on-unity-1204.html
+* https://gist.github.com/3156991
 
 ### Specs
 

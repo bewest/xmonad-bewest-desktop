@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#
+# Configure the environment for a desktop, specifically xmonad.
+# Simulates .xinitrc / .xsession, et al
+ 
+# Take care of X administrivia.
+xrandr -s 0
+xrdb $HOME/.Xresources
+
+logger -t "DEBUG: $0 $@"
+echo "DEBUG" $0 $@
+
+# XXX: the new way of doing this is to let ubuntu find and establish
+# the environment for most things.  We pretty much only want to load
+# xmonad connected to dbus, which I think gives everything nicer menus
+# and fonts and whatnot.
+
+# This usually starts all the widgets for me, if some of your widgets are
+# missing add them here.
+gnome-session &
+unity-2d-panel &
+unity-2d-shell &
+
+# dzen stuff. should probably move to a dedicated script.  dzen creates a
+# little status window that floats everywhere.  It reads comands from stdin
+# and writes the resuls into the window.  It would be a shame to use all this
+# fancy technology without a clock to look at.
+FG='#a8a3f7' 
+BG='#3f3c6d' 
+ 
+while true ; do date ; sleep 60 ; done | \
+             dzen2 -e '' -x 0 -w 400 -ta l -fg $FG -bg $BG -p 5 &
+ 
+# Stolen from xmonad wiki or some place.
+# Launch xmonad
+dbus-launch --exit-with-session xmonad
+#xmonad
+
+#####
+# EOF
