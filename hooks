@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case $1 in
+startup)
+  dbus-send --session --print-reply  --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.RegisterClient string:xmonad.desktop string:$DESKTOP_AUTO_START_ID
+;;
+esac
+
+
